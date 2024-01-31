@@ -96,7 +96,7 @@ function IncomeItem({
 }
 
 const IncomeItemStyled = styled.div`
-    background: #FCF6F9;
+    background: var(--background-image);
     border: 2px solid #FFFFFF;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
@@ -106,7 +106,7 @@ const IncomeItemStyled = styled.div`
     align-items: center;
     gap: 1rem;
     width: 100%;
-    color: #222260;
+    color: #1F2544;
     .icon{
         width: 80px;
         height: 80px;
@@ -159,6 +159,12 @@ const IncomeItemStyled = styled.div`
                     opacity:0.8;
                 }
             }
+        }
+    }
+
+    @media only screen and (max-width: 580px) {
+        .text {
+            flex-direction: column;
         }
     }
 `;

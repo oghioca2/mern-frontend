@@ -20,25 +20,25 @@ function Dashboard() {
                 <div className="stats-con">
                     <div className="chart-con">
                         <Chart />
-                        <div className="amount-con">
-                            <div className="income">
-                                <h2>Total Income</h2>
-                                <p>
-                                    {dollar} {totalIncome()}
-                                </p>
-                            </div>
-                            <div className="expense">
-                                <h2>Total Expense</h2>
-                                <p>
-                                    {dollar} {totalExpenses()}
-                                </p>
-                            </div>
-                            <div className="balance">
-                                <h2>Total Balance</h2>
-                                <p>
-                                    {dollar} {totalBalance()}
-                                </p>
-                            </div>
+                    </div>
+                    <div className="amount-con">
+                        <div className="income">
+                            <h2>Total Income</h2>
+                            <p>
+                                {dollar} {totalIncome()}
+                            </p>
+                        </div>
+                        <div className="expense">
+                            <h2>Total Expense</h2>
+                            <p>
+                                {dollar} {totalExpenses()}
+                            </p>
+                        </div>
+                        <div className="balance">
+                            <h2>Total Balance</h2>
+                            <p>
+                                {dollar} {totalBalance()}
+                            </p>
                         </div>
                     </div>
                     <div className="history-con">
@@ -72,46 +72,48 @@ const DashboardStyled = styled.div`
     .stats-con{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
         gap: 2rem;
         .chart-con{
-            grid-column: 1 / 4;
+            grid-area: 1 / 1 / 5 / 4;
             height: 400px;
-            .amount-con{
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 2rem;
-                margin-top: 2rem;
-                .income, .expense{
-                    grid-column: span 2;
+        }
+
+        .amount-con{
+            grid-area: 3 / 1 / 5 / 4;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            .income, .expense{
+                grid-column: span 2;
+            }
+            .income, .expense, .balance{
+                background: var(--background-image);
+                border: 2px solid #FFFFFF;
+                box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+                border-radius: 20px;
+                padding: 1rem;
+                p{
+                    font-size: 3.5rem;
+                    font-weight: 700;
                 }
-                .income, .expense, .balance{
-                    background: var(--background-image);
-                    border: 2px solid #FFFFFF;
-                    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-                    border-radius: 20px;
-                    padding: 1rem;
-                    p{
-                        font-size: 3.5rem;
-                        font-weight: 700;
-                    }
-                }
-                .balance{
-                    grid-column: 2 / 4;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    p{
-                        color: var(--color-green);
-                        opacity: 0.6;
-                        font-size: 4.5rem;
-                    }
+            }
+            .balance{
+                grid-column: 2 / 4;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                p{
+                    color: var(--color-green);
+                    opacity: 0.6;
                 }
             }
         }
 
         .history-con{
-            grid-column: 4 / -1;
+            grid-area: 1 / 4 / 5 / 6;
             h2{
                 margin: 1rem 0;
                 display: flex;
@@ -140,6 +142,48 @@ const DashboardStyled = styled.div`
             }
         }
     }
+
+    @media only screen and (max-width: 1320px) {
+        .stats-con {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            gap: 1rem;
+
+            .chart-con,
+            .amount-con,
+            .history-con {
+                grid-area: auto;
+            }
+
+            .amount-con {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                
+                .income,
+                .expense,
+                .balance {
+                    grid-area: auto;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .stats-con {
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+        }
+    }
+
+    @media only screen and (max-width: 520px) {
+        .stats-con {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+            .chart-con {
+                height: 200px;
+            }
+        }
+    }
+
 `;
 
 export default Dashboard

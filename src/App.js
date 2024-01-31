@@ -1,8 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import bg from  './img/bg.png';
 import {MainLayout} from './styles/Layouts';
-import Orb from "./Components/Orb/Orb";
 import Navigation from "./Components/Navigation/Navigation";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import Dashboard from "./Components/Dashboard/Dashboard";
@@ -11,9 +9,10 @@ import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
 
 function App() {
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(1);
+  const [isNavVisible, setIsNavVisible] = useState(true);
 
-  const global = useGlobalContext()
+  const global = useGlobalContext();
   console.log(global);
 
   const displayData = () => {
@@ -29,21 +28,35 @@ function App() {
       default:
         return <Dashboard />
     }
-  }
+  };
 
-  const orbMemo = useMemo(() => {
-    return <Orb />
-  },[])
+  const toggleNavVisibility = () => {
+    setIsNavVisible(!isNavVisible);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsNavVisible(window.innerWidth > 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <AppStyled bg={bg} className="App">
+    <AppStyled className="App">
       <GlobalStyle />
-      {orbMemo}
       <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>
+      {isNavVisible && <Navigation active={active} setActive={setActive} toggleNavVisibility={toggleNavVisibility} />}
+        <main style={{ display: isNavVisible && window.innerWidth <= 768 ? "none" : "block" }}>
           {displayData()}
         </main>
+        <div className="mobile-menu-button" onClick={toggleNavVisibility}>
+          <i className="fas fa-bars"></i>
+        </div>
       </MainLayout>
     </AppStyled>
   );
@@ -63,6 +76,23 @@ const AppStyled = styled.div`
     overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 0;
+    }
+  }
+  .mobile-menu-button {
+    display: none;
+    position: fixed;
+    top: 3rem;
+    right: 3rem;
+    font-size: 2rem;
+    background: transparent;
+    color: var(--primary-color4);
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .mobile-menu-button {
+      display: block;
     }
   }
 `;

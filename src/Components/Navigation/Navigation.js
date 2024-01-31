@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import avatar from '../../img/avatar.png';
 import { menuItems } from '../../utils/menuItems';
 import { signout } from '../../utils/icons';
 
-function Navigation({active, setActive}) {
+function Navigation({ active, setActive, toggleNavVisibility }) {
+    const handleItemClick = (itemId) => {
+        setActive(itemId);
+        if (window.innerWidth <= 768) {
+            toggleNavVisibility();
+        }
+    };
+
     return (
         <NavStyled>
             <div className="user-con">
@@ -18,7 +25,7 @@ function Navigation({active, setActive}) {
                 {menuItems.map((item) => {
                     return <li
                         key={item.id}
-                        onClick={() => setActive(item.id)}
+                        onClick={() => handleItemClick(item.id)}
                         className={active === item.id ? 'active': ''}
                     >
                         {item.icon}
@@ -108,6 +115,24 @@ const NavStyled = styled.nav`
             height: 100%;
             background: var(--primary-color);
             border-radius: 0 10px 10px 0;
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+        width: 200px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        width: 100%;
+        padding: 1rem;
+
+        .menu-items {
+            li {
+                grid-template-columns: auto;
+                justify-content: center;
+                text-align: center;
+                padding-left: 0.5rem;
+            }
         }
     }
 `;

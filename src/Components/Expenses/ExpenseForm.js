@@ -103,7 +103,7 @@ const ExpenseFormStyled = styled.form`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    input, textarea, select{
+    input, textarea, select {
         font-family: inherit;
         font-size: inherit;
         outline: none;
@@ -111,36 +111,48 @@ const ExpenseFormStyled = styled.form`
         padding: .5rem 1rem;
         border-radius: 5px;
         border: 2px solid #fff;
-        background: transparent;
+        background: var(--background-image);
         resize: none;
         box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-        color: rgba(34, 34, 96, 0.9);
+        color: rgba(31, 37, 68, 0.9);
         &::placeholder{
-            color: rgba(34, 34, 96, 0.4);
+            color: rgba(31, 37, 68, 0.4);
         }
     }
-    .input-control{
-        input{
+    .input-control {
+        input {
             width: 100%;
         }
     }
 
-    .selects{
+    .selects {
         display: flex;
         justify-content: flex-end;
-        select{
-            color: rgba(34, 34, 96, 0.4);
+        select {
+            color: rgba(31, 37, 68, 0.4);
             &::focus, &:active{
-                color: rgba(34, 34, 96, 1);
+                color: rgba(31, 37, 68, 1);
             }
         }
     }
 
-    .submit-btn{
-        button{
+    .submit-btn {
+        button {
             box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
             &:hover{
                 background: var(--color-green) !important;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 580px) {
+        .selects {
+            justify-content: flex-start;
+        }
+
+        .input-control {
+            input {
+                width: 60%;
             }
         }
     }

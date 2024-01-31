@@ -46,29 +46,41 @@ function Income() {
 const IncomeStyled = styled.div`
     display: flex;
     overflow: auto;
-    .total-income{
+    .total-income {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #FCF6F9;
+        background: var(--background-image);
         border: 2px solid #FFFFFF;
         box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
         border-radius: 20px;
         padding: 1rem;
-        magrgin: 1rem 0;
+        margin: 1rem 0;
         font-size: 2rem;
         gap: .5rem;
-        span{
+        span {
             font-size: 2.5rem;
             font-weight: 800;
             color: var(--color-green);
         }
     }
-    .income-content{
+    .income-content {
         display: flex;
+        flex-wrap: wrap;
         gap: 2rem;
-        .incomes{
+        
+        .incomes {
             flex: 1;
+        }
+    }
+
+    @media only screen and (max-width: 1400px) {
+        .income-content {
+            flex-direction: column;
+
+            .incomes {
+                width: 100%;
+            }
         }
     }
 `;

@@ -9,12 +9,12 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     :root {
-        --primary-color: #222260;
-        --primary-color2: rgba(34, 34, 96, 1);
-        --primary-color3: rgba(34, 34, 96, .4);
-        --primary-color4: rgba(34, 34, 96, .6);
-        --background-color: rgba(252, 246, 249, 0.78);
-        --background-image: #FCF6F9;
+        --primary-color: #1F2544;
+        --primary-color2: rgba(31, 37, 68, 1);
+        --primary-color3: rgba(31, 37, 68, .4); 
+        --primary-color4: rgba(31, 37, 68, .6); 
+        --background-color: #F3D7CA;
+        --background-image: #F5EEE6;
         --color-white: #FFFFFF;
         --color-green: #42AD00;
         --color-grey: #AAA;
@@ -26,7 +26,8 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Nunito', sans-serif;
         font-size: clamp(1rem, 1.5vw, 1.2rem);
         overflow: hidden;
-        color: rgba(34, 34, 96, .6);
+        color: var(--primary-color4);
+        background: #E6A4B4;
     }
 
     h1, h2, h3, h4, h5, h6{
